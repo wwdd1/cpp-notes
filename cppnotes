@@ -1,0 +1,7 @@
+Using Lvalue References:
+
+Example : For loops
+
+for( auto & x : arr ) // works
+++x;
+
