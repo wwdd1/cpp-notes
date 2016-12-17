@@ -1,7 +1,38 @@
-Using Lvalue References:
+///>Using Lvalue References:
 
 Example : For loops
 
 for( auto & x : arr ) // works
 ++x;
 
+///>Swapping with std::move (deep copy):
+
+void swap( vector<string> & x, vector<string> & y )
+{
+  vector<string> tmp = std::move( x );
+  x = std::move( y );
+  y = std::move( tmp );
+}
+
+///>Cloning (copying) objects:
+
+~IntCell( ); // Destructor
+IntCell( const IntCell & rhs ); // Copy constructor
+IntCell( IntCell && rhs ); // Move constructor
+IntCell & operator= ( const IntCell & rhs ); // Copy assignment
+IntCell & operator= ( IntCell && rhs ); // Move assignment
+
+///>Copy-Move default constructors (default kword)
+
+~IntCell( ) { cout << "Invoking destructor" << endl; } // Destructor
+IntCell( const IntCell & rhs ) = default; // Copy constructor
+IntCell( IntCell && rhs ) = default; // Move constructor
+IntCell & operator= ( const IntCell & rhs ) = default; // Copy assignment
+IntCell & operator= ( IntCell && rhs ) = default; // Move assignment
+
+//Alternatively, we could disallow all copying and moving of IntCells
+
+IntCell( const IntCell & rhs ) = delete; // No Copy constructor
+IntCell( IntCell && rhs ) = delete; // No Move constructor
+IntCell & operator= ( const IntCell & rhs ) = delete; // No Copy assignment
+IntCell & operator= ( IntCell && rhs ) = delete; // No Move assignment
